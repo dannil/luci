@@ -6,10 +6,23 @@
 	variables which is already used in cascade.css.
 */
 :root {
+	color-scheme: light;
+
+	--font-body: "Microsoft Yahei", "WenQuanYi Micro Hei", "sans-serif", "Helvetica Neue", "Helvetica", "Hiragino Sans GB";
+
+	/** Branding according to official styleguide */
+	--openwrt-branding-light-blue: #00b5e2;
+	--openwrt-branding-dark-blue: #002b49;
+	--openwrt-branding-black: #212322;
+	--openwrt-branding-white: #ffffff;
+	--openwrt-branding-white-rgb: 255, 255, 255;
+
 	/** General colors */
-	--white-color: #ffffff;
+	--white-color: var(--openwrt-branding-white);
+	--white-color-rgb: var(--openwrt-branding-white-rgb);
 	--white-color-low: #f9f9f9;
 	--black-color: #000000;
+	--black-color-rgb: 0, 0, 0;
 	--black-color-low: #202124;
 	--yellow-color: #f0ad4e;
 	--yellow-color-high: #eea236;
@@ -29,7 +42,9 @@
 	--light-blue-color-high: #46b8da;
 	--on-light-blue-color: var(--white-color);
 	
-	--main-color: #00B5E2;
+	--background-color: #eeeeee;
+
+	--main-color: var(--openwrt-branding-light-blue);
 	--secondary-color: #0099cc;
 
 	--header-bg: #00B5E2;
@@ -42,7 +57,7 @@
 	--submenu-bg-hover: #d4d4d4;
 	--submenu-bg-hover-active: #00B5E2;
 
-	--notice-color: #002B49;
+	--notice-color: var(--openwrt-branding-dark-blue);
 	--on-notice-color: var(--white-color);
 
 	--danger-color: var(--red-color);
@@ -57,5 +72,129 @@
 	--error-color: #ff0000;
 	--on-error-color: var(--white-color);
 
-	--font-body: "Microsoft Yahei", "WenQuanYi Micro Hei", "sans-serif", "Helvetica Neue", "Helvetica", "Hiragino Sans GB";
+	--arrow-icon-url: url(./icons/arrow_black.svg);
+	--logout-icon-url: url(./icons/logout_black.svg);
+	--menu-icon-url: url(./icons/menu_white.svg);
+
+	--default-border-color: #cccccc;
+
+	--text-color-rgb: var(--black-color-rgb);
+	--text-color: rgb(var(--text-color-rgb));
+	--text-notice-color: #101010;
+	--text-notice-background-color: #dddddd;
+	--text-abbreviation-background-color: #0069d6;
+	--text-shadow: var(--white-color);
+
+	--default-button-background-color: var(--gray-color);
+
+	--table-row-even-color: var(--section-table-row-color);
+	--table-row-odd-color: var(--white-color-low);
+	--table-border-color: var(--gray-color);
+
+	/* --progress-bar-progress-color: var(--light-blue-color); */
+	--progress-bar-background-color: var(--background-color);
+
+	--section-background-color: var(--white-color);
+	--section-heading-color: #404040;
+	--section-heading-border-color: var(--background-color);
+	--section-description-color: #999999;
+	--section-node-tabbed-border-color: var(--tabmenu-background-color);
+	--section-table-row-color: #f4f4f4;
+
+	--modal-background-color: var(--section-background-color);
+
+	--footer-color: #aaaaaa;
+	--footer-text-shadow: #bbbbbb;
+
+	/* --main-menu-background-color: var(--white-color); */
+	/* --main-menu-heading-color: var(--black-color-low); */
+	/* --main-menu-link-color: #5f6368; */
+	/* --main-menu-hover-color: var(--gray-color); */
+	/* --main-menu-active-color: var(--primary-color); */
+
+	--tabmenu-background-color: var(--gray-color);
+	--tabmenu-hover-color: #f1f1f1;
+	--tab-background-color: var(--white-color);
+	--tab-border-hover-color: #c9c9c9;
+
+	--shadow-color-rgb: 0, 0, 0;
+	--shadow-color-negative-rgb: 255, 255, 255;
+
+	--interface-badge-color: #eeeeee;
+	--interface-badge-table-cell-color: #f0f0f0;
+	--interface-box-header-background-color: #eeeeee;
+	--interface-box-active-background-color: var(--light-blue-color);
+	--interface-box-color: var(--white-color-low);
+
+	--change-list-text-color: var(--black-color);
+	--change-list-var-background-color: #eeeeee;
+
+	--list-item-selected-background-color: #b0d0f0;
+	--list-item-hover-background-color: linear-gradient(90deg, #a3c2e8 0%, #84aad9 100%);
+
+	--dynlist-item-color: #666666;
+}
+
+:root[data-darkmode="true"] {
+	color-scheme: dark;
+
+	--bar-bg: var(--dark-blue-color);
+	--menu-bg-color: #3b3b3b;
+	--menu-color: var(--white-color-low);
+	--menu-color-hover: var(--white-color-low);
+	--main-menu-color: var(--white-color-low);
+	--submenu-bg-hover: #5f6368;
+
+	--background-color: var(--openwrt-branding-black);
+
+	--arrow-icon-url: url(./icons/arrow_white.svg);
+	--logout-icon-url: url(./icons/logout_white.svg);
+	/* --menu-icon-url: url(./icons/menu_dark.svg); */
+
+	--default-border-color: #282828;
+
+	--text-color-rgb: var(--white-color-rgb);
+	--text-notice-color: var(--gray-color-high);
+	--text-notice-background-color: #2a2a2a;
+	--text-abbreviation-background-color: var(--dark-blue-color);
+	--text-shadow: var(--black-color);
+
+	--default-button-background-color: #5f6368;
+
+	--table-row-odd-color: #282828;
+	--table-border-color: var(--default-border-color);
+
+	/* --progress-bar-progress-color: var(--dark-blue-color); */
+
+	--section-background-color: #3a3a3a;
+	--section-heading-color: var(--white-color);
+	--section-table-row-color: #323232;
+
+	--footer-color: #3a3a3a;
+	--footer-text-shadow: #2f2f2f;
+
+	/* --main-menu-background-color: #3b3b3b; */
+	/* --main-menu-heading-color: var(--white-color-low); */
+	/* --main-menu-link-color: #cccccc; */
+	/* --main-menu-hover-color: #5f6368; */
+
+	--tabmenu-background-color: #1d1d1d;
+	--tabmenu-hover-color: var(--submenu-bg-hover);
+	--tab-background-color: #3a3a3a;
+
+	--shadow-color-rgb: 0, 0, 0;
+	--shadow-color-negative-rgb: 0, 0, 0;
+
+	--interface-badge-color: var(--background-color);
+	--interface-badge-table-cell-color: var(--table-row-even-color);
+	--interface-box-header-background-color: #1d1d1d;
+	--interface-box-active-background-color: var(--dark-blue-color);
+	--interface-box-color: var(--background-color);
+
+	--change-list-var-background-color: #5f6368;
+
+	--list-item-selected-background-color: var(--submenu-bg-hover);
+	--list-item-hover-background-color: var(--gray-color-high);
+
+	--dynlist-item-color: var(--gray-color-high);
 }
