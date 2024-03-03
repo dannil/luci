@@ -24,11 +24,13 @@
 	const boardinfo = ubus.call('system', 'board');
 	const hostname = striptags(boardinfo?.hostname ?? '?');
 
+	const darkpref = (theme == 'material-dark' ? 'true' : (theme == 'material-light' ? 'false' : null));
+
 	http.prepare_content('text/html; charset=UTF-8');
 -%}
 
 <!DOCTYPE html>
-<html lang="{{ dispatcher.lang }}">
+<html lang="{{ dispatcher.lang }}" {{ darkpref ? `data-darkmode="${darkpref}"` : '' }}>
 <head>
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
@@ -47,6 +49,16 @@
 {% endif %}
 <script src="{{ dispatcher.build_url('admin/translations', dispatcher.lang) }}"></script>
 <script src="{{ resource }}/cbi.js"></script>
+{% if (!darkpref): %}
+	<script type="text/javascript">
+		var mediaQuery = window.matchMedia('(prefers-color-scheme: dark)'),
+			rootElement = document.querySelector(':root'),
+			setDarkMode = function(match) { rootElement.setAttribute('data-darkmode', match.matches) };
+
+		mediaQuery.addEventListener('change', setDarkMode);
+		setDarkMode(mediaQuery);
+	</script>
+{% endif %}
 <title>{{ hostname }}{{ node?.title ? ` - ${striptags(node.title)}` : '' }} - LuCI</title>
 {% if (css): %}
 <style title="text/css">{{ css }}</style>
