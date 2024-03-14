@@ -3153,3 +3153,15 @@ input[name="nslookup"] {
 [data-darkmode="true"] .ifacebox-head[style] {
 	background: linear-gradient(rgba(var(--zone-color-rgb), .4), rgba(var(--zone-color-rgb), .3)) !important;
 }
+
+[data-darkmode="true"] [data-page="admin-status-realtime-load"] #view > div[style] {
+	background-color: var(--background-color) !important;
+}
+
+[data-darkmode="true"] [data-page="admin-status-realtime-bandwidth"] #view > div > div > div > div[style] {
+	background-color: var(--background-color) !important;
+}
+
+[data-darkmode="true"] [data-page="admin-status-realtime-connections"] #view > div[style] {
+	background-color: var(--background-color) !important;
+}
