@@ -21,21 +21,65 @@ var callSetPassword = rpc.declare({
 
 return view.extend({
 	checkPassword: function(section_id, value) {
-		var strength = document.querySelector('.cbi-value-description'),
-		    strongRegex = new RegExp("^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$", "g"),
-		    mediumRegex = new RegExp("^(?=.{7,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$", "g"),
-		    enoughRegex = new RegExp("(?=.{6,}).*", "g");
+
+		// Estimate entropy (E) according to E=log2(R^L), where R = all ASCII printable characters 
+		// and L (length of password) takes into account:
+		//   * Only unique characters
+		function estimateEntropy(string) {
+			const characterSetSize = 95; // 126 - 33
+			const length = new Set([...string]).size;
+		
+			// Estimate entropy
+			const entropy = Math.floor(Math.log2(Math.pow(characterSetSize, length)));
+			return entropy;
+		}
+
+		var strength = document.querySelector('.cbi-value-description');
 
 		if (strength && value.length) {
-			if (false == enoughRegex.test(value))
+			const estimatedEntropy = estimateEntropy(value);
+			console.log(estimatedEntropy);
+
+			if (value.length < 6) {
 				strength.innerHTML = '%s: <span style="color:red">%s</span>'.format(_('Password strength'), _('More Characters'));
-			else if (strongRegex.test(value))
-				strength.innerHTML = '%s: <span style="color:green">%s</span>'.format(_('Password strength'), _('Strong'));
-			else if (mediumRegex.test(value))
-				strength.innerHTML = '%s: <span style="color:orange">%s</span>'.format(_('Password strength'), _('Medium'));
-			else
+			} else if (estimatedEntropy < 36) {
+				strength.innerHTML = '%s: <span style="color:red">%s</span>'.format(_('Password strength'), _('Very weak'));
+			} else if (estimatedEntropy < 60) {
 				strength.innerHTML = '%s: <span style="color:red">%s</span>'.format(_('Password strength'), _('Weak'));
+			} else if (estimatedEntropy < 120) {
+				strength.innerHTML = '%s: <span style="color:green">%s</span>'.format(_('Password strength'), _('Strong'));
+			} else if (estimatedEntropy >= 120) {
+				strength.innerHTML = '%s: <span style="color:green">%s</span>'.format(_('Password strength'), _('Very strong'));
+			}
+
+			// if (false == enoughRegex.test(value))
+			// 	strength.innerHTML = '%s: <span style="color:red">%s</span>'.format(_('Password strength'), _('More Characters'));
+			// else if (strongRegex.test(value))
+			// 	strength.innerHTML = '%s: <span style="color:green">%s</span>'.format(_('Password strength'), _('Strong'));
+			// else if (mediumRegex.test(value))
+			// 	strength.innerHTML = '%s: <span style="color:orange">%s</span>'.format(_('Password strength'), _('Medium'));
+			// else
+			// 	strength.innerHTML = '%s: <span style="color:red">%s</span>'.format(_('Password strength'), _('Weak'));
 		}
+
+		// var strength = document.querySelector('.cbi-value-description'),
+		//     strongRegex = new RegExp("^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$", "g"),
+		//     mediumRegex = new RegExp("^(?=.{7,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$", "g"),
+		//     enoughRegex = new RegExp("(?=.{6,}).*", "g");
+
+		// if (strength && value.length &&) {
+
+		// 	console.log(estimateEntropy(value));
+
+		// 	if (false == enoughRegex.test(value))
+		// 		strength.innerHTML = '%s: <span style="color:red">%s</span>'.format(_('Password strength'), _('More Characters'));
+		// 	else if (strongRegex.test(value))
+		// 		strength.innerHTML = '%s: <span style="color:green">%s</span>'.format(_('Password strength'), _('Strong'));
+		// 	else if (mediumRegex.test(value))
+		// 		strength.innerHTML = '%s: <span style="color:orange">%s</span>'.format(_('Password strength'), _('Medium'));
+		// 	else
+		// 		strength.innerHTML = '%s: <span style="color:red">%s</span>'.format(_('Password strength'), _('Weak'));
+		// }
 
 		return true;
 	},
