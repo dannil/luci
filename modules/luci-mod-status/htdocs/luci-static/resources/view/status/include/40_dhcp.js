@@ -60,7 +60,30 @@ return baseclass.extend({
 	},
 
 	renderLeases: function(data) {
-		var leases = Array.isArray(data[0].dhcp_leases) ? data[0].dhcp_leases : [],
+		var mocked_leases = [
+			{
+					"expires": 86019,
+					"hostname": "mocked_dhcp_1",
+					"macaddr": "00:11:22:33:44:55",
+					"ipaddr": "10.0.0.1"
+			},
+			{
+					"expires": 68252,
+					"hostname": "mocked_dhcp_2",
+					"macaddr": "00:11:22:33:44:56",
+					"duid": "01:00:11:22:33:44:56",
+					"ipaddr": "10.0.0.2"
+			},
+			{
+					"expires": 80671,
+					"hostname": "mocked_dhcp_3",
+					"macaddr": "00:11:22:33:44:57",
+					"duid": "00:11:22:33:44:57",
+					"ipaddr": "10.0.0.3"
+			}
+		];
+
+		var leases = mocked_leases,
 		    leases6 = Array.isArray(data[0].dhcp6_leases) ? data[0].dhcp6_leases : [],
 		    machints = data[1].getMACHints(false),
 		    hosts = uci.sections('dhcp', 'host'),
