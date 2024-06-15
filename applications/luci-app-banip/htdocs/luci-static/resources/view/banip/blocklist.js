@@ -52,3 +52,21 @@ return view.extend({
 	handleSaveApply: null,
 	handleReset: null
 });
+
+
+// 'use strict';
+// 'require view';
+// 'require rpc'
+
+// var callSystemInfo = rpc.declare({
+// 	object: 'system',
+// 	method: 'info'
+// });
+
+// return view.extend({
+// 	handleSave: function (ev) {
+// 		return callSystemInfo().then(function(response) {
+// 			console.log('Data from RPC: ' + JSON.stringify(response));
+// 		});
+// 	}
+// });
