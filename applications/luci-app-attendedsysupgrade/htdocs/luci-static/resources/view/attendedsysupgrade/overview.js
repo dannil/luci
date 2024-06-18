@@ -432,8 +432,9 @@ return view.extend({
 				]);
 				return;
 			}
-			const remote_revision = response.json().revision;
 			if (version.endsWith('SNAPSHOT')) {
+				const remote_revision = response.json().revision;
+				console.log(remote_revision);
 				if (
 					get_revision_count(revision) < get_revision_count(remote_revision)
 				) {
@@ -475,8 +476,9 @@ return view.extend({
 				let mapdata = {
 					request: {
 						profile,
-						version: candidates[0][0],
-						version_code: remote_revision,
+						candidates,
+						// version: candidates[0][0],
+						// version_code: candidates[0][1],
 						packages: Object.keys(packages).sort(),
 					},
 				};
@@ -491,21 +493,22 @@ return view.extend({
 					'Use defaults for the safest update'
 				);
 				o = s.option(form.ListValue, 'version', 'Select firmware version');
-				for (let candidate of candidates) {
+				for (let i = 0; i < candidates.length; i++) {
+					const candidate = candidates[i];
+					const display_format = candidate[1] ? `${candidate[0]} - ${candidate[1]}` : candidate[0]
+					console.log(candidate);
+					console.log(version);
+					console.log(revision);
 					if (candidate[0] == version && candidate[1] == revision) {
+						console.log('true')
 						o.value(
-							candidate[0],
+							i,
 							_('[installed] %s').format(
-								candidate[1]
-									? `${candidate[0]} - ${candidate[1]}`
-									: candidate[0]
+								display_format
 							)
 						);
 					} else {
-						o.value(
-							candidate[0],
-							candidate[1] ? `${candidate[0]} - ${candidate[1]}` : candidate[0]
-						);
+						o.value(i, display_format);
 					}
 				}
 
@@ -533,11 +536,13 @@ return view.extend({
 									class: 'btn cbi-button cbi-button-positive important',
 									click: ui.createHandlerFn(this, function () {
 										map.save().then(() => {
+											console.log(mapdata);
+
 											const content = {
 												...firmware,
 												packages: mapdata.request.packages,
-												version: mapdata.request.version,
-												version_code: mapdata.request.version_code,
+												version: mapdata.request.candidates[mapdata.request.version][0],
+												version_code: mapdata.request.candidates[mapdata.request.version][1],
 												profile: mapdata.request.profile
 											};
 											this.pollFn = L.bind(function () {
