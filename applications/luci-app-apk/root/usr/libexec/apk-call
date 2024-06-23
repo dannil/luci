@@ -1,0 +1,79 @@
+#!/bin/sh
+
+. /usr/share/libubox/jshn.sh
+
+action=$1
+shift
+
+case "$action" in
+	list-installed)
+		packages=$(apk info)
+		for pkg in $packages; do
+			# Get detailed information about the package
+			pkg_info=$(apk info -a $pkg)
+
+			# Extract package name, description, and size
+			# name=$(echo "$pkg_info" | grep -m 1 '^name' | awk '{print $2}')
+			name=$pkg
+			description=$(echo "$pkg_info" | awk '/description:/{getline; print}')
+			size=$(echo "$pkg_info" | awk '/installed size:/{getline; print}')
+
+			string_to_extract=$(echo "$pkg_info" | awk '/description:/')
+			version="${string_to_extract#*$name-}"
+			version="${version%% *}"
+
+			# Print the extracted information
+			echo "Package: $name"
+			echo "Version: $version"
+			echo "Description: $description"
+			echo "Size: $size"
+			echo ""
+		done
+	;;
+	list-available)
+		apk list -a | sed '/\[installed\]/d'
+	;;
+	install|update|remove)
+		(
+			opkg="opkg"
+
+			while [ -n "$1" ]; do
+				case "$1" in
+					--autoremove|--force-overwrite|--force-removal-of-dependent-packages)
+						opkg="$opkg $1"
+						shift
+					;;
+					-*)
+						shift
+					;;
+					*)
+						break
+					;;
+				esac
+			done
+
+			if flock -x 200; then
+				$opkg $action "$@" </dev/null >/tmp/opkg.out 2>/tmp/opkg.err
+				code=$?
+				stdout=$(cat /tmp/opkg.out)
+				stderr=$(cat /tmp/opkg.err)
+			else
+				code=255
+				stderr="Failed to acquire lock"
+			fi
+
+			json_init
+			json_add_int code $code
+			[ -n "$stdout" ] && json_add_string stdout "$stdout"
+			[ -n "$stderr" ] && json_add_string stderr "$stderr"
+			json_dump
+		) 200>/tmp/opkg.lock
+
+		rm -f /tmp/opkg.lock /tmp/opkg.err /tmp/opkg.out
+	;;
+	*)
+		echo "Usage: $0 {list-installed|list-available}"       >&2
+		echo "       $0 {install|upgrade|remove} pkg[ pkg...]" >&2
+		exit 1
+	;;
+esac

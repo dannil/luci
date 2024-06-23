@@ -1,0 +1,13 @@
+{
+	"admin/system/apk": {
+		"title": "Software (APK)",
+		"order": 30,
+		"action": {
+			"type": "view",
+			"path": "apk"
+		},
+		"depends": {
+			"acl": [ "luci-app-apk" ]
+		}
+	}
+}
