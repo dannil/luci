@@ -24,13 +24,23 @@ return view.extend({
 			_('Traffic destined for known (other than default) networks is handled by the main routing table.') + '<br />' +
 			_('Traffic matching a rule, but all WAN interfaces for that policy are down will be blackholed.') + '<br />' +
 			_('Names may contain characters A-Z, a-z, 0-9, _ and no spaces.') + '<br />' +
-			_('Rules may not share the same name as configured interfaces, members or policies.'));
+			_('RAWADWAWD'));
 
 		s = m.section(form.GridSection, 'rule');
 		s.addremove = true;
 		s.anonymous = false;
 		s.nodescriptions = true;
 		s.sortable  = true;
+		// s.handleAdd = function(ev, name) {
+		// 	console.log(ev);
+		// 	console.log(name);
+		// 	if (name.length > 15) {
+		// 		console.log("FALSE");
+		// 		return false;
+		// 	}
+		// 	console.log("TRUE");
+		// 	return true;
+		// }
 
 		o = s.option(form.ListValue, 'family', _('Internet Protocol'));
 		o.default = '';
