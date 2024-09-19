@@ -1237,7 +1237,12 @@ return view.extend({
 			};
 
 			proto = s2.option(form.ListValue, 'proto', _('Protocol'));
-			proto.validate = name.validate;
+			proto.validate = function(section_id, value) {
+				var names = protocols.map(p => p.getProtocol());
+				console.log(names);
+				console.log(value);
+				return names.includes(value);
+			};
 
 			device = s2.option(widgets.DeviceSelect, 'device', _('Device'));
 			device.noaliases = false;
