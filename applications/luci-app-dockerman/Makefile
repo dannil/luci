@@ -12,7 +12,16 @@ PKG_LICENSE:=AGPL-3.0
 PKG_MAINTAINER:=lisaac <lisaac.cn@gmail.com> \
 		Florian Eckert <fe@dev.tdt.de>
 
-PKG_VERSION:=v0.5.13-20240317
+PKG_VERSION:=0.5.13
+PKG_RELEASE=1
+
+define Package/$(PKG_NAME)/config
+# shown in make menuconfig <Help>
+help
+	$(LUCI_TITLE)
+	.
+	Version: $(PKG_VERSION)-$(PKG_RELEASE)
+endef
 
 include ../../luci.mk
 
