@@ -1227,17 +1227,39 @@ return view.extend({
 				if (uci.get('network', value) != null)
 					return _('The interface name is already used');
 
-				var pr = network.getProtocol(proto.formvalue(section_id), value),
-				    ifname = pr.isVirtual() ? '%s-%s'.format(pr.getProtocol(), value) : 'br-%s'.format(value);
+				// var pr = network.getProtocol(proto.formvalue(section_id), value),
+				    // ifname = pr.isVirtual() ? '%s-%s'.format(pr.getProtocol(), value) : 'br-%s'.format(value);
+
+				var pr = network.getProtocol(proto.formvalue(section_id), value);
+
+				console.log("PR:" + pr.getName());
+				console.log("DEV: " + pr.getDevice()?.getName());
+				console.log("Ifname: " + pr.getIfname());
+
+				// console.log(pr);
+
+				// console.log("PRDN: " + pr.getDevice().getName());
+
+				var ifname = null;
+				if (pr.getIfname() != null) {
+					// Prefer actual interface name over heuristics
+					ifname = pr.getIfname();
+				} else if (pr.isVirtual()) {
+					ifname = '%s-%s'.format(pr.getProtocol(), value);
+				} else {
+					ifname = 'br-%s'.format(value);
+				}
+
+				console.log("RES: " + ifname);
 
 				if (ifname.length > 15)
-					return _('The interface name is too long');
+					return _('The interface name %s is too long').format(ifname);
 
 				return true;
 			};
 
 			proto = s2.option(form.ListValue, 'proto', _('Protocol'));
-			proto.validate = name.validate;
+			// proto.validate = name.validate;
 
 			device = s2.option(widgets.DeviceSelect, 'device', _('Device'));
 			device.noaliases = false;
