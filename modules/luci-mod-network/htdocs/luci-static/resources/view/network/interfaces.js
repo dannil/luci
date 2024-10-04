@@ -1231,6 +1231,8 @@ return view.extend({
 				    // ifname = pr.isVirtual() ? '%s-%s'.format(pr.getProtocol(), value) : 'br-%s'.format(value);
 
 				var pr = network.getProtocol(proto.formvalue(section_id), value);
+				var device = pr.getDevice();
+				console.log("D1: " + device);
 
 				console.log("PR:" + pr.getName());
 				console.log("DEV: " + pr.getDevice()?.getName());
@@ -1251,6 +1253,8 @@ return view.extend({
 				}
 
 				console.log("RES: " + ifname);
+
+				console.log();
 
 				if (ifname.length > 15)
 					return _('The interface name %s is too long').format(ifname);
