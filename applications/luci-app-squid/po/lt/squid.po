@@ -12,15 +12,15 @@ msgstr ""
 "1 : 2);\n"
 "X-Generator: Weblate 5.7-dev\n"
 
-#: applications/luci-app-squid/luasrc/model/cbi/squid.lua:42
+#: applications/luci-app-squid/htdocs/luci-static/resources/view/squid.js:25
 msgid "Advanced Settings"
 msgstr "Pažangūs nustatymai"
 
-#: applications/luci-app-squid/luasrc/model/cbi/squid.lua:38
+#: applications/luci-app-squid/htdocs/luci-static/resources/view/squid.js:35
 msgid "Coredump files directory"
 msgstr "„Coredump“ failų vietovę/kelią"
 
-#: applications/luci-app-squid/luasrc/model/cbi/squid.lua:28
+#: applications/luci-app-squid/htdocs/luci-static/resources/view/squid.js:24
 msgid "General Settings"
 msgstr "Bendri nustatymai"
 
@@ -28,15 +28,15 @@ msgstr "Bendri nustatymai"
 msgid "Grant UCI access for luci-app-squid"
 msgstr "Suteikti „UCI“ prieigą – „luci-app-squid“"
 
-#: applications/luci-app-squid/luasrc/model/cbi/squid.lua:30
+#: applications/luci-app-squid/htdocs/luci-static/resources/view/squid.js:27
 msgid "Port"
 msgstr "Prievadas"
 
-#: applications/luci-app-squid/luasrc/model/cbi/squid.lua:21
+#: applications/luci-app-squid/htdocs/luci-static/resources/view/squid.js:18
 #: applications/luci-app-squid/root/usr/share/luci/menu.d/luci-app-squid.json:3
 msgid "Squid"
 msgstr "„Squid“"
 
-#: applications/luci-app-squid/luasrc/model/cbi/squid.lua:34
+#: applications/luci-app-squid/htdocs/luci-static/resources/view/squid.js:31
 msgid "Visible Hostname"
 msgstr "Matomas Įrenginio (t.y skleidėjo/vedėjo) pavadinimas"

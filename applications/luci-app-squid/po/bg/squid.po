@@ -10,15 +10,15 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 5.5-dev\n"
 
-#: applications/luci-app-squid/luasrc/model/cbi/squid.lua:42
+#: applications/luci-app-squid/htdocs/luci-static/resources/view/squid.js:25
 msgid "Advanced Settings"
 msgstr "Разширени настройки"
 
-#: applications/luci-app-squid/luasrc/model/cbi/squid.lua:38
+#: applications/luci-app-squid/htdocs/luci-static/resources/view/squid.js:35
 msgid "Coredump files directory"
 msgstr ""
 
-#: applications/luci-app-squid/luasrc/model/cbi/squid.lua:28
+#: applications/luci-app-squid/htdocs/luci-static/resources/view/squid.js:24
 msgid "General Settings"
 msgstr "Общи настройки"
 
@@ -26,15 +26,15 @@ msgstr "Общи настройки"
 msgid "Grant UCI access for luci-app-squid"
 msgstr ""
 
-#: applications/luci-app-squid/luasrc/model/cbi/squid.lua:30
+#: applications/luci-app-squid/htdocs/luci-static/resources/view/squid.js:27
 msgid "Port"
 msgstr "Порт"
 
-#: applications/luci-app-squid/luasrc/model/cbi/squid.lua:21
+#: applications/luci-app-squid/htdocs/luci-static/resources/view/squid.js:18
 #: applications/luci-app-squid/root/usr/share/luci/menu.d/luci-app-squid.json:3
 msgid "Squid"
 msgstr ""
 
-#: applications/luci-app-squid/luasrc/model/cbi/squid.lua:34
+#: applications/luci-app-squid/htdocs/luci-static/resources/view/squid.js:31
 msgid "Visible Hostname"
 msgstr ""
