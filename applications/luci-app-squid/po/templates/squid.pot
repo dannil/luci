@@ -1,15 +1,15 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8"
 
-#: applications/luci-app-squid/luasrc/model/cbi/squid.lua:42
+#: applications/luci-app-squid/htdocs/luci-static/resources/view/squid.js:26
 msgid "Advanced Settings"
 msgstr ""
 
-#: applications/luci-app-squid/luasrc/model/cbi/squid.lua:38
+#: applications/luci-app-squid/htdocs/luci-static/resources/view/squid.js:36
 msgid "Coredump files directory"
 msgstr ""
 
-#: applications/luci-app-squid/luasrc/model/cbi/squid.lua:28
+#: applications/luci-app-squid/htdocs/luci-static/resources/view/squid.js:25
 msgid "General Settings"
 msgstr ""
 
@@ -17,15 +17,15 @@ msgstr ""
 msgid "Grant UCI access for luci-app-squid"
 msgstr ""
 
-#: applications/luci-app-squid/luasrc/model/cbi/squid.lua:30
+#: applications/luci-app-squid/htdocs/luci-static/resources/view/squid.js:28
 msgid "Port"
 msgstr ""
 
-#: applications/luci-app-squid/luasrc/model/cbi/squid.lua:21
+#: applications/luci-app-squid/htdocs/luci-static/resources/view/squid.js:19
 #: applications/luci-app-squid/root/usr/share/luci/menu.d/luci-app-squid.json:3
 msgid "Squid"
 msgstr ""
 
-#: applications/luci-app-squid/luasrc/model/cbi/squid.lua:34
+#: applications/luci-app-squid/htdocs/luci-static/resources/view/squid.js:32
 msgid "Visible Hostname"
 msgstr ""

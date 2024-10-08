@@ -2,9 +2,16 @@
 	"luci-app-squid": {
 		"description": "Grant UCI access for luci-app-squid",
 		"read": {
+			"file": {
+				"/etc/squid/*": [ "read" ],
+				"/etc/init.d/squid restart": [ "exec" ]
+			},
 			"uci": [ "squid" ]
 		},
 		"write": {
+			"file": {
+				"/etc/squid/*": [ "write" ]
+			},
 			"uci": [ "squid" ]
 		}
 	}
