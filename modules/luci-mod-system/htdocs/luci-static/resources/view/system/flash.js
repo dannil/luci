@@ -206,13 +206,44 @@ return view.extend({
 					.then(function(res) { reply.push(res); return reply; });
 			}, this, ev.target))
 			.then(L.bind(function(btn, res) {
-				/* sysupgrade opts table  [0]:checkbox element [1]:check condition [2]:args to pass */
+				/* sysupgrade opts table  [0]:input element [1]:check condition [2]:args to pass */
+
+
+				var inputs = [
+					{
+						restore_config: {
+							element: E('input', { type: 'radio' }),
+							description: _('Back up current configuration and restore it after the upgrade'),
+							default: false,
+							flag: '-f',
+							inputs: [
+								{
+									keep: {
+										element: E('input', { type: 'checkbox' }),
+										description: 'foo',
+										default: false,
+										flag: '-n'
+									}
+								},
+								{
+									backup_pkgs : {
+										element: E('input', { type: 'checkbox' }),
+										description: 'bar',
+										default: true,
+										flag: '-k'
+									}
+								}
+							]
+						}
+					}
+				];
+
 				var opts = {
 				    keep : [ E('input', { type: 'checkbox' }), false, '-n' ],
 				    force : [ E('input', { type: 'checkbox' }), true, '--force' ],
 				    skip_orig : [ E('input', { type: 'checkbox' }), true, '-u' ],
-				    backup_pkgs : [ E('input', { type: 'checkbox' }), true, '-k' ],
-				    },
+				    backup_pkgs : [ E('input', { type: 'checkbox' }), true, '-k' ], 
+					restore_config : [ E('input', { type: 'radio' }), false, '-f' ], },
 				    is_valid = res[1].valid,
 				    is_forceable = res[1].forceable,
 				    allow_backup = res[1].allow_backup,
@@ -226,9 +257,45 @@ return view.extend({
 					res[0].sha256sum ? E('li', {}, '%s: %s'.format(_('SHA256'), res[0].sha256sum)) : ''
 				]));
 
-				body.push(E('p', {}, E('label', { 'class': 'btn' }, [
-					opts.keep[0], ' ', _('Keep settings and retain the current configuration')
-				])));
+				// E('label', {
+				// 	'data-tooltip': _('Hide all translation packages')
+				// }, [
+				// 	E('input', {
+				// 		'type': 'radio',
+				// 		'name': 'filter_i18n',
+				// 		'value': 'none',
+				// 		'change': null
+				// 	}),
+				// 	' ',
+				// 	_('none', 'Display translation packages')
+				// ])
+
+				for (const input of inputs) {
+					console.log(input);
+					for (const key in input) {
+						console.log(key);
+						const checkbox = input[key];
+						console.log(checkbox);
+						var ui_elem = E('label', {}, [
+							checkbox.element,
+							' ',
+							checkbox.description
+						]);
+						body.push(ui_elem);
+					}
+				}
+
+				// body.push(E('p', {}, [
+				// 	opts.restore_config[0],
+				// 	' ',
+				// 	_('Back up current configuration and restore it after the upgrade')
+				// ]));
+				// // body.push(E('p', {}, ));
+				
+
+				// body.push(E('p', {}, E('label', { 'class': 'btn' }, [
+				// 	opts.keep[0], ' ', _('Keep settings and retain the current configuration')
+				// ])));
 
 				if (!is_valid || is_too_big)
 					body.push(E('hr'));
