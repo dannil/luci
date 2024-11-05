@@ -2,7 +2,10 @@
 	"luci-app-dynapoint": {
 		"description": "Grant UCI access for luci-app-dynapoint",
 		"read": {
-			"uci": [ "dynapoint", "wireless" ]
+			"file": {
+				"/usr/bin/curl": [ "read" ]
+			},
+			"uci": [ "dynapoint", "wireless", "network" ]
 		},
 		"write": {
 			"uci": [ "dynapoint", "wireless" ]

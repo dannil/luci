@@ -2,9 +2,8 @@
 	"admin/services/dynapoint": {
 		"title": "DynaPoint",
 		"action": {
-			"type": "cbi",
-			"path": "dynapoint",
-			"post": { "cbi.submit": true }
+			"type": "view",
+			"path": "dynapoint"
 		},
 		"depends": {
 			"acl": [ "luci-app-dynapoint" ],
