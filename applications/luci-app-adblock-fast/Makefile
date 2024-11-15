@@ -6,7 +6,7 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=luci-app-adblock-fast
 PKG_LICENSE:=AGPL-3.0-or-later
 PKG_MAINTAINER:=Stan Grishin <stangri@melmac.ca>
-PKG_VERSION:=1.1.2
+PKG_VERSION:=invalid
 PKG_RELEASE:=10
 
 LUCI_TITLE:=AdBlock-Fast Web UI
