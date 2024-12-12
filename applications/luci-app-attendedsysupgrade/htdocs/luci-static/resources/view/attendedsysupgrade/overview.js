@@ -402,6 +402,24 @@ return view.extend({
 			});
 	},
 
+	handleUnreachableAPI: function(url, details) {
+		let body = [
+			E(
+				'p',
+				{},
+				_('Could not reach API at "%s". Please try again later.').format(url)
+			),
+		];
+		if (details) {
+			body.push(E('pre', {}, details));
+		}
+		body.push(E('div', { class: 'right' }, [
+			E('div', { class: 'btn', click: ui.hideModal }, _('Close')),
+		]));
+
+		ui.showModal(_('Error connecting to upgrade server'), body);
+	},
+
 	handleCheck: function (data, firmware) {
 		this.request_hash = '';
 		let { url, revision, advanced_mode, branch } = data;
@@ -424,19 +442,7 @@ return view.extend({
 
 		L.resolveDefault(request.get(request_url)).then((response) => {
 			if (!response.ok) {
-				ui.showModal(_('Error connecting to upgrade server'), [
-					E(
-						'p',
-						{},
-						_('Could not reach API at "%s". Please try again later.').format(
-							response.url
-						)
-					),
-					E('pre', {}, response.responseText),
-					E('div', { class: 'right' }, [
-						E('div', { class: 'btn', click: ui.hideModal }, _('Close')),
-					]),
-				]);
+				this.handleUnreachableAPI(response.url, response.responseText);
 				return;
 			}
 			if (version.endsWith('SNAPSHOT')) {
@@ -572,6 +578,8 @@ return view.extend({
 					]),
 				]);
 			}
+		}).catch(() => {
+			this.handleUnreachableAPI(data.url, null);
 		});
 	},
 
