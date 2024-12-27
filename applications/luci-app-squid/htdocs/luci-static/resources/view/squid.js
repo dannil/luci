@@ -63,7 +63,7 @@ return view.extend({
 			return validateFile(value);
 		};
 
-		o = s.taboption('general', form.Value, 'http_port', _('Port'));
+		let o = s.taboption('general', form.Value, 'http_port', _('Port'));
 		o.datatype = 'portrange';
 		o.placeholder = '0-65535';
 
