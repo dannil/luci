@@ -1,8 +1,11 @@
 {
 	"scripts": {
+		"lint": "eslint",
 		"doc": "LC_ALL=C jsdoc -c jsdoc.conf.json -t node_modules/jaguarjs-jsdoc"
 	},
 	"devDependencies": {
+		"eslint": "^9.17.0",
+		"globals": "^15.14.0",
 		"jaguarjs-jsdoc": "^1.1.0",
 		"jsdoc": "^3.6.7"
 	}
