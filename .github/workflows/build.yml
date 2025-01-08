@@ -49,6 +49,17 @@ jobs:
           echo "Building $PACKAGES"
           echo "PACKAGES=$PACKAGES" >> $GITHUB_ENV
 
+
+      - name: Setup NodeJS
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Lint
+        run: |
+          npm install
+          npm run lint
+
       - name: Build
         uses: openwrt/gh-action-sdk@v7
         env:
